@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PERFECT TIMING</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h1 id='head'> PERFECT TIMING </h1>
+  <span id='downcount'>
+  <h2 id='heading'> DOWNCOUNTER </h2>
+  <h3 id='tags'> Days Hours Minutes Seconds </h3>
+  <h3 id='digits'><span id='days'> 00 </span>
+  <span id='hours'> 00 </span>
+  <span id='minutes'> 00 </span>
+  <span id='seconds'> 00 </span>
+  </h3>
+  <input type="button" value='START' id='toggle'/> 
+  <button id='reset'> RESET </button>
+  </span>
+  <span id='upcount'>
+  <h2 id='heading'> UPCOUNTER </h2>
+  <h3 id='tags'> Days Hours Minutes Seconds </h3>
+  <h3 id='digits'><span id='days2'> 00 </span>
+  <span id='hours2'> 00 </span>
+  <span id='minutes2'> 00 </span>
+  <span id='seconds2'> 00 </span>
+  </h3>
+  <input type="button" value='START' id='toggle2'/> 
+  <button id='reset2'> RESET </button>
+
+  </span>
+  <span id='test'>
+  <form id ='input'> 
+  SET COUNT TARGET </br>
+  <input type="text" id="second" placeholder="SECONDS" /></br>
+  <input type="button" value="SUBMIT" id="submit" onclick="Input();"/></br>
+  </form>
+  </span>
+  
+  <script type="text/javascript" src="js/downcounter.js"></script>
+  <script type="text/javascript" src="js/upcounter.js"></script>
+  <script> 
+  var sec,val;
+  function Input(){
+  	sec=document.getElementById("second");
+  	console.log("sec value");
+  	var obj1={};
+  	var obj2={};
+  	val=sec.value*1000;
+  	var t= 12;
+  	t= 14;
+  	t= 15;
+  	console.log(t);
+  	document.getElementById('submit').disabled='true';
+  	var obj1= new downcount(val,['days','hours','minutes','seconds'], function(){ document.getElementById('toggle').value='DONE'; document.getElementById('toggle').disabled=true;  });
+  	obj1.setInitial();
+  	var togglebutton = document.getElementById('toggle');
+    var resetbutton = document.getElementById('reset');
+    togglebutton.addEventListener('click', function(){
+  	if(obj1.flag){
+  		obj1.stop();
+  		this.value="START";
+  	}
+  	else{
+        obj1.start();
+        this.value="STOP";
+  	}
+  });
+  resetbutton.addEventListener('click',function(){
+  	obj1.reset();
+  	togglebutton.disabled=false;
+  	togglebutton.value="START";
+  });
+  var obj2= new upcount(val,['days2','hours2','minutes2','seconds2'], function(){ document.getElementById('toggle2').value='DONE'; document.getElementById('toggle2').disabled=true; });
+  var togglebutton2 = document.getElementById('toggle2');
+  var resetbutton2 = document.getElementById('reset2');
+  obj2.setInitial();
+  togglebutton2.addEventListener('click', function(){
+  	if(obj2.flag){
+  		obj2.stop2();
+  		this.value="START";
+  	}
+  	else{
+        obj2.start2();
+        this.value="STOP";
+  	}
+  });
+  resetbutton2.addEventListener('click',function(){
+  	obj2.reset2();
+  	togglebutton2.disabled=false;
+  	togglebutton2.value="START";
+  });
+  }
+  
+  </script>
+  <button type="button" id="resettimer" onClick="refreshPage()">RESET TIMER</button>
+  <script>
+function refreshPage(){
+    window.location.reload();
+} 
+</script>
+</body>
+</html>
